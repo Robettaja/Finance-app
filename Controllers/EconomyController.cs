@@ -46,6 +46,7 @@ namespace finance.Controllers
 
             foreach (var income in incomes.Where(i => i.IsRecurring && i.Payday < DateTime.Now))
             {
+                Console.WriteLine("fsfsa");
                 income.Payday = income.Payday!.Value.AddMonths(
                     (int)Math.Ceiling((DateTime.Now - income.Payday.Value).TotalDays / 30));
                 await DatabaseManipulator.Update(income, i => i.Id == income.Id);
@@ -71,7 +72,7 @@ namespace finance.Controllers
             await DatabaseManipulator.Save(income);
 
 
-            return View(model);
+            return RedirectToAction("Income");
         }
 
         [Authorize]

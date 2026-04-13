@@ -90,9 +90,9 @@ public static class DatabaseManipulator
         {
             return await table.Find(filter).ToListAsync();
         }
-        catch
+        catch (Exception ex)
         {
-            Console.WriteLine("Error retrieving objects");
+            Console.WriteLine($"Error retrieving objects: {ex.Message}");
         }
         return [];
 
