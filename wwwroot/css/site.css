@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@source "../Views";
+
+@theme {
+  --color-dark-950: #0a0a0a; /* near black */
+  --color-dark-900: #111111; /* page background */
+  --color-dark-850: #1a1a1a; /* subtle contrast */
+  --color-dark-800: #1e1e1e; /* card background */
+  --color-dark-750: #242424; /* elevated card */
+  --color-dark-700: #2a2a2a; /* sidebar / panel */
+  --color-dark-650: #303030; /* input background */
+  --color-dark-600: #3a3a3a; /* hover state */
+  --color-dark-500: #4a4a4a; /* border / divider */
+  --color-dark-400: #6b6b6b; /* muted text */
+  --color-dark-300: #9a9a9a; /* secondary text */
+  --color-dark-200: #c4c4c4; /* body text */
+  --color-dark-100: #e5e5e5; /* heading text */
+  --color-dark-50: #f5f5f5; /* bright text */
+}
+@custom-variant data-active {
+  &:where([data-state="active"]),
+  &:where([data-active]:not([data-active="false"])) {
+    @slot;
+  }
+}
+
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+  box-shadow:
+    0 0 0 0.1rem white,
+    0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.form-floating > .form-control-plaintext::placeholder,
+.form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder,
+.form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}

@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@if(!User.Identity.IsAuthenticated) {
+    <div class="flex-1 bg-[url('/images/darkbg.jpg')] bg-center flex items-center justify-center">
+        <div class="bg-dark-900/90 p-5 rounded-lg border border-dark-700">
+            <a asp-action="account" asp-controller="Auth" class="bg-dark-800 hover:bg-dark-700 text-white rounded-lg w-fit p-2 m-1 text-xl font-medium" >Login</a>
+            <a asp-action="account" asp-controller="Auth" asp-route-tab="register" class="bg-dark-50 hover:bg-dark-200 text-dark-600 rounded-lg w-fit p-2 m-1 text-xl font-medium" >Sign Up</a>
+        </div>
+    </div>
+}
+
