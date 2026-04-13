@@ -120,3 +120,4 @@
 /home/roope/projects/asp-projut/finance/obj/Debug/net10.0/compressed/xaol1yoxhn-{0}-b9228eflpl-b9228eflpl.gz
 /home/roope/projects/asp-projut/finance/obj/Debug/net10.0/compressed/uzccmszmh6-{0}-2tj1sjhksk-2tj1sjhksk.gz
 /home/roope/projects/asp-projut/finance/obj/Debug/net10.0/compressed/zsnjaq7rf1-{0}-myoyw9cg81-myoyw9cg81.gz
+/home/roope/projects/asp-projut/finance/obj/Debug/net10.0/finance.sourcelink.json

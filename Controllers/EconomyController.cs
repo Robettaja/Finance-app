@@ -23,6 +23,8 @@ namespace finance.Controllers
             model.UserId = user.Id;
             return View(model);
         }
+        [Authorize]
+        [RequireAntiforgeryToken]
         public async Task<IActionResult> _ExpenseList()
         {
             User user = await DatabaseManipulator.GetSingle<User>(u => u.Username == User.Identity!.Name);
@@ -40,6 +42,7 @@ namespace finance.Controllers
         }
 
         [Authorize]
+        [IgnoreAntiforgeryToken]
         [Route("/Expense/List")]
         public async Task<IActionResult> ExpenseList(string? search)
         {
