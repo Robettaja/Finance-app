@@ -10,6 +10,7 @@ namespace finance.Models
         public string? Gategory { get; set; }
         public List<Expense>? Expenses { get; set; } = [];
         public int Sum { get; set; }
+        public string? MostExpensiveGategory { get; set; }
         public ObjectId UserId { get; set; }
 
     }

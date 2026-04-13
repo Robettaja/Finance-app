@@ -1,4 +1,6 @@
 using System.Linq.Expressions;
+using finance.Models.Tables;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace finance.Models;
@@ -54,46 +56,17 @@ public static class DatabaseManipulator
 
     }
 
-    public static async Task SaveMany<T, TKey>(
-        List<T> saveableObjects,
-        Func<T, TKey> keySelector,
-        FilterDefinition<T> duplicateFilter = null)
+    public static async Task SaveMany<T>(List<T> items)
     {
-        if (saveableObjects == null || saveableObjects.Count == 0)
-            return;
-
         var table = database.GetCollection<T>(typeof(T).Name);
 
         try
         {
-            var uniqueItems = saveableObjects
-                .GroupBy(keySelector)
-                .Select(g => g.First())
-                .ToList();
-
-            if (duplicateFilter != null)
-            {
-                var existingItems = await table
-                    .Find(duplicateFilter)
-                    .ToListAsync();
-
-                var existingKeys = existingItems
-                    .Select(keySelector)
-                    .ToHashSet();
-
-                uniqueItems = uniqueItems
-                    .Where(x => !existingKeys.Contains(keySelector(x)))
-                    .ToList();
-            }
-
-            if (uniqueItems.Count == 0)
-                return;
-
-            await table.InsertManyAsync(uniqueItems);
+            await table.InsertManyAsync(items);
         }
-        catch (Exception ex)
+        catch
         {
-            Console.WriteLine($"Error saving objects: {ex.Message}");
+
         }
     }
     public static async Task<T> GetSingle<T>(Expression<Func<T, bool>> filter)
@@ -123,6 +96,22 @@ public static class DatabaseManipulator
         }
         return [];
 
+    }
+    public static async Task<string?> GetTopCategory(ObjectId userId)
+    {
+        var table = database.GetCollection<Expense>("Expense");
+
+        var result = await table.Aggregate()
+            .Match(x => x.UserId == userId)
+            .Group(x => x.Gategory, g => new
+            {
+                Category = g.Key,
+                Total = g.Sum(x => x.Amount)
+            })
+            .SortByDescending(x => x.Total)
+            .FirstOrDefaultAsync();
+
+        return result?.Category;
     }
     public static async Task DeleteOne<T>(Expression<Func<T, bool>> filter)
     {
