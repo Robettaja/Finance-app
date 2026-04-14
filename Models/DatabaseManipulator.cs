@@ -88,7 +88,8 @@ public static class DatabaseManipulator
         var table = database.GetCollection<T>(typeof(T).Name);
         try
         {
-            return await table.Find(filter).ToListAsync();
+            List<T> list = await table.Find(filter).ToListAsync();
+            return list;
         }
         catch (Exception ex)
         {

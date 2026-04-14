@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ht5FMqw1ibU=",
+  "dgSpecHash": "vvLt8A6X76A=",
   "success": true,
-  "projectFilePath": "/home/roope/projects/Finance-app/finance.csproj",
+  "projectFilePath": "/home/roope/projects/asp-projut/finance/finance.csproj",
   "expectedPackageFiles": [
     "/home/roope/.nuget/packages/awssdk.core/3.7.100.14/awssdk.core.3.7.100.14.nupkg.sha512",
     "/home/roope/.nuget/packages/awssdk.securitytoken/3.7.100.14/awssdk.securitytoken.3.7.100.14.nupkg.sha512",

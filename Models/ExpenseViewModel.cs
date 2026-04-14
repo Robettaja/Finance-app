@@ -5,7 +5,6 @@ namespace finance.Models
 {
     public class ExpenseViewModel
     {
-
         public string? ExpenseName { get; set; }
         public int Amount { get; set; }
         public string? Gategory { get; set; }
@@ -13,7 +12,8 @@ namespace finance.Models
         public int Sum { get; set; }
         public string? MostExpensiveGategory { get; set; }
         public required ObjectId UserId { get; set; }
-        public async void Initialize()
+
+        public async Task Initialize()
         {
             Expenses = await DatabaseManipulator.GetMany<Expense>(e => e.UserId == UserId);
             Sum = Expenses.Sum(x => x.Amount);
@@ -32,11 +32,6 @@ namespace finance.Models
             };
             await DatabaseManipulator.Save(expense);
             Expenses = await DatabaseManipulator.GetMany<Expense>(e => e.UserId == UserId);
-
         }
-
-
-
-
     }
 }

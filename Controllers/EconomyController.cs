@@ -16,7 +16,7 @@ namespace finance.Controllers
         {
             User user = await GetUser();
             ExpenseViewModel model = new() { UserId = user.Id };
-            model.Initialize();
+            await model.Initialize();
 
             return View(model);
         }
@@ -66,8 +66,8 @@ namespace finance.Controllers
             User user = await GetUser();
             var expenses = await DatabaseManipulator.GetMany<Expense>(e =>
                 e.UserId == user.Id &&
-                (string.IsNullOrEmpty(search) || e.ExpenseName.Contains(search.ToLower())));
-            return PartialView("_IncomeList", expenses);
+                (string.IsNullOrEmpty(search) || e.ExpenseName.ToLower().Contains(search.ToLower())));
+            return PartialView("_ExpenseList", expenses);
         }
 
         [Authorize]
@@ -98,7 +98,9 @@ namespace finance.Controllers
         public async Task<IActionResult> DeleteExpense(ObjectId id)
         {
             await DatabaseManipulator.DeleteOne<Expense>(e => e.Id == id);
-            return PartialView("_ExpenseList");
+            User user = await GetUser();
+            var expenses = await DatabaseManipulator.GetMany<Expense>(e => e.UserId == user.Id);
+            return PartialView("_ExpenseList", expenses);
 
         }
         [HttpPost]
@@ -108,7 +110,9 @@ namespace finance.Controllers
         public async Task<IActionResult> DeleteIncome(ObjectId id)
         {
             await DatabaseManipulator.DeleteOne<Income>(e => e.Id == id);
-            return PartialView("_IncomeList");
+            User user = await GetUser();
+            var incomes = await DatabaseManipulator.GetMany<Income>(e => e.UserId == user.Id);
+            return PartialView("_IncomeList", incomes);
 
         }
 
