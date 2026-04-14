@@ -20,15 +20,18 @@ namespace finance.Controllers
 
             return View(model);
         }
+
+        [HttpPost]
         [Authorize]
         [RequireAntiforgeryToken]
-        public async Task<IActionResult> _ExpenseList(string? search)
+        [Route("/Expense")]
+        public async Task<IActionResult> Expense(ExpenseViewModel model)
         {
             User user = await GetUser();
-            var expenses = await DatabaseManipulator.GetMany<Expense>(e =>
-                e.UserId == user.Id &&
-                (string.IsNullOrEmpty(search) || e.ExpenseName.Contains(search.ToLower())));
-            return PartialView("_IncomeList", expenses);
+            model.UserId = user.Id;
+            await model.CreateExpense();
+            return RedirectToAction("Expense");
+
         }
 
 
@@ -56,6 +59,18 @@ namespace finance.Controllers
         }
 
         [Authorize]
+        [Route("/Expense/List")]
+        [RequireAntiforgeryToken]
+        public async Task<IActionResult> _ExpenseList(string? search)
+        {
+            User user = await GetUser();
+            var expenses = await DatabaseManipulator.GetMany<Expense>(e =>
+                e.UserId == user.Id &&
+                (string.IsNullOrEmpty(search) || e.ExpenseName.Contains(search.ToLower())));
+            return PartialView("_IncomeList", expenses);
+        }
+
+        [Authorize]
         [IgnoreAntiforgeryToken]
         [Route("/Income/List")]
         public async Task<IActionResult> IncomeList(string? search)
@@ -63,21 +78,10 @@ namespace finance.Controllers
             User user = await GetUser();
             var incomes = await DatabaseManipulator.GetMany<Income>(e =>
                 e.UserId == user.Id &&
-                (string.IsNullOrEmpty(search) || e.IncomeName.Contains(search.ToLower())));
+                (string.IsNullOrEmpty(search) || e.IncomeName.ToLower().Contains(search.ToLower())));
             return PartialView("_IncomeList", incomes);
         }
 
-        [Authorize]
-        [IgnoreAntiforgeryToken]
-        [Route("/Expense/List")]
-        public async Task<IActionResult> ExpenseList(string? search)
-        {
-            User user = await GetUser();
-            var expenses = await DatabaseManipulator.GetMany<Expense>(e =>
-                e.UserId == user.Id &&
-                (string.IsNullOrEmpty(search) || e.ExpenseName.Contains(search.ToLower())));
-            return PartialView("_ExpenseList", expenses);
-        }
 
         [Authorize]
         [HttpGet]
@@ -105,20 +109,6 @@ namespace finance.Controllers
         {
             await DatabaseManipulator.DeleteOne<Income>(e => e.Id == id);
             return PartialView("_IncomeList");
-
-        }
-
-
-        [HttpPost]
-        [Authorize]
-        [RequireAntiforgeryToken]
-        [Route("/Expense")]
-        public async Task<IActionResult> Expense(ExpenseViewModel model)
-        {
-            User user = await GetUser();
-            model.UserId = user.Id;
-            await model.CreateExpense();
-            return RedirectToAction("Expense");
 
         }
 
