@@ -1,4 +1,4 @@
-@model string
+@model ConfirmDeleteModel
 
 <div class="absolute bg-dark-800/50 rounded-lg left-0 top-1/2 lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 lg:w-[450px] 
             p-2 m-5 border border-dark-700 w-full min-h-[200px] flex">
@@ -8,8 +8,8 @@
         <form class="flex flex-row space-x-2" asp-action="Delete" asp-controller="Economy" method="post">
             <div class="flex justify-between w-full">
                 <button class="text-white bg-red-500 flex justify-center items-center rounded-lg p-2 w-fit cursor-pointer"
-                        hx-post="/Economy/DeleteExpense"
-                        hx-vals='{"id": "@Model"}'
+                        hx-post="@Model.Url"
+                        hx-vals='{"id": "@Model.Id"}'
                         hx-include="[name=search]"
                         hx-target="#expense-list"
                         hx-swap="innerHTML"

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/roope/projects/asp-projut/finance/finance.csproj": {}
+    "/home/roope/projects/Finance-app/finance.csproj": {}
   },
   "projects": {
-    "/home/roope/projects/asp-projut/finance/finance.csproj": {
+    "/home/roope/projects/Finance-app/finance.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/roope/projects/asp-projut/finance/finance.csproj",
+        "projectUniqueName": "/home/roope/projects/Finance-app/finance.csproj",
         "projectName": "finance",
-        "projectPath": "/home/roope/projects/asp-projut/finance/finance.csproj",
+        "projectPath": "/home/roope/projects/Finance-app/finance.csproj",
         "packagesPath": "/home/roope/.nuget/packages/",
-        "outputPath": "/home/roope/projects/asp-projut/finance/obj/",
+        "outputPath": "/home/roope/projects/Finance-app/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/roope/.nuget/NuGet/NuGet.Config"

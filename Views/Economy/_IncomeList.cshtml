@@ -16,7 +16,7 @@
         <form>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
              stroke="currentColor" class="text-red-500 size-8 cursor-pointer"
-             hx-get="/Expense/DeleteConfirm?id=@income.Id.ToString()"
+             hx-get="/Expense/DeleteConfirm?id=@income.Id.ToString()&url=/Economy/DeleteIncome"
              hx-target="#confirm-modal"
              hx-swap="innerHTML">
             <path stroke-linecap="round" stroke-linejoin="round"
