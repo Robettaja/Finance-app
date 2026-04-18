@@ -1,16 +1,15 @@
 @model ExpenseViewModel 
-@using finance.Components;
 
 <div class="m-1 lg:ml-3">
 <div class="lg:flex">
 <!-- EXPENSE CREATION -->
-<div class="m-2 bg-dark-900 rounded-lg h-fit w-full max-w-[500px] space-y-4 border border-dark-800">
+<div class="m-2 bg-dark-900 rounded-lg h-fit w-full max-w-[1000px] space-y-4 border border-dark-800">
     <h2 class="text-white font-bold font-2xl m-2">Create new expense</h2>
     <form asp-action="Expense" asp-controller="Economy" method="post" class="flex flex-col m-2 space-y-3">
         <label class="text-white ">Expense Name</label>
         <input asp-for="ExpenseName" type="text" class="rounded-lg p-3 w-full text-white border-hidden bg-dark-800">
 
-        <label class="text-white">Amount</label>
+        <label class="text-white">Amount (€)</label>
         <input asp-for="Amount" type="number" class="rounded-lg p-3 w-full text-white border-hidden bg-dark-800">
         <div class="w-fit">
 
@@ -31,7 +30,7 @@
 
 
 <!-- INFORMATION -->
-<div class="m-2 bg-dark-900 rounded-lg h-fit w-full max-w-[500px] space-y-4 border border-dark-800 w-full">
+<div class="m-2 bg-dark-900 rounded-lg h-fit w-full max-w-[1000px] space-y-4 border border-dark-800 w-full">
     <h2 class="text-white font-bold m-2">Expense Informations</h2>
     <p class="text-white font-medium m-2">Total: @Model.Sum€</p>
     <div class="flex items-center">
@@ -42,7 +41,7 @@
 </div>
 
 <!-- EXPENSE LIST -->
-<div class="m-2 bg-dark-900 rounded-lg h-fit w-full max-w-[500px] space-y-4 border border-dark-800">
+<div class="m-2 bg-dark-900 rounded-lg h-fit w-full max-w-[1000px] space-y-4 border border-dark-800">
 
     <h2 class="text-white font-bold font-2xl m-2 m-1">Your expenses</h2>
 

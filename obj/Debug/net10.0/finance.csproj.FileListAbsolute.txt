@@ -243,4 +243,4 @@
 /home/roope/projects/Finance-app/obj/Debug/net10.0/finance.genruntimeconfig.cache
 /home/roope/projects/Finance-app/obj/Debug/net10.0/ref/finance.dll
 /home/roope/projects/Finance-app/obj/Debug/net10.0/compressed/zsnjaq7rf1-{0}-w8qejtdx5a-w8qejtdx5a.gz
-/home/roope/projects/asp-projut/finance/obj/Debug/net10.0/compressed/zsnjaq7rf1-{0}-w8qejtdx5a-w8qejtdx5a.gz
+/home/roope/projects/asp-projut/finance/obj/Debug/net10.0/compressed/zsnjaq7rf1-{0}-4iyjlqseb1-4iyjlqseb1.gz

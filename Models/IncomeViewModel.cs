@@ -11,22 +11,17 @@ namespace finance.Models
         public int Amount { get; set; }
         public DateTime Payday { get; set; } = DateTime.Now;
         public bool IsRecuring { get; set; }
-        public int Sum { get; set; }
-        public int DaysUntilPayday { get; set; }
+        public float Sum { get; set; }
         public required ObjectId UserId { get; set; }
         public List<Income> Incomes { get; set; } = [];
 
         public async Task Initialize()
         {
-            Incomes = await DatabaseManipulator.GetMany<Income>(e => e.UserId == UserId);
+            Incomes = (await DatabaseManipulator.GetMany<Income>(e => e.UserId == UserId)).OrderByDescending(e => e.Timestamp).ToList();
+            Sum = Incomes
+                    .Where(e => e.Timestamp.Month == DateTime.Now.Month && e.Timestamp.Year == DateTime.Now.Year)
+                    .Sum(x => x.Amount);
 
-            foreach (var income in Incomes.Where(i => i.IsRecurring && i.Payday < DateTime.Now))
-            {
-                income.Payday = income.Payday!.Value.AddMonths(
-                    (int)Math.Ceiling((DateTime.Now - income.Payday.Value).TotalDays / 30));
-                await DatabaseManipulator.Update(income, i => i.Id == income.Id);
-            }
-            Incomes = await DatabaseManipulator.GetMany<Income>(e => e.UserId == UserId);
 
         }
         public async Task CreateIncome()
@@ -35,6 +30,7 @@ namespace finance.Models
             {
                 IncomeName = IncomeName,
                 Amount = Amount,
+                Timestamp = DateTime.Now,
                 Payday = Payday,
                 IsRecurring = IsRecuring,
                 UserId = UserId

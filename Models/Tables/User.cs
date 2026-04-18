@@ -6,6 +6,7 @@ namespace finance.Models.Tables
         public string? Username { get; set; }
         public byte[]? Salt { get; set; }
         public byte[]? Password { get; set; }
+        public int SavingGoal { get; set; }
 
     }
 }

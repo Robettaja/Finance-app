@@ -98,6 +98,42 @@ public static class DatabaseManipulator
         return [];
 
     }
+    public static async Task<ChartData> GetLast6MonthsChart(ObjectId userId)
+    {
+        var table = database.GetCollection<Expense>(nameof(Expense));
+
+        var startDate = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, 1)
+            .AddMonths(-5);
+
+        var raw = await table.Aggregate()
+            .Match(x => x.UserId == userId && x.Timestamp >= startDate)
+            .Group(
+                x => new { x.Timestamp.Year, x.Timestamp.Month },
+                g => new
+                {
+                    g.Key.Year,
+                    g.Key.Month,
+                    Total = g.Sum(x => x.Amount)
+                }
+            )
+            .ToListAsync();
+
+        var result = new ChartData();
+
+        for (int i = 0; i < 6; i++)
+        {
+            var date = startDate.AddMonths(i);
+
+            var match = raw.FirstOrDefault(x =>
+                x.Year == date.Year && x.Month == date.Month);
+
+            result.Labels.Add(date.ToString("MMM"));
+
+            result.Data.Add(match?.Total ?? 0);
+        }
+
+        return result;
+    }
     public static async Task<string?> GetTopCategory(ObjectId userId)
     {
         var table = database.GetCollection<Expense>("Expense");
@@ -126,5 +162,12 @@ public static class DatabaseManipulator
             Console.WriteLine("Error retrieving objects");
         }
 
+    }
+
+    public class MonthlyExpense
+    {
+        public int Year { get; set; }
+        public int Month { get; set; }
+        public int Total { get; set; }
     }
 }

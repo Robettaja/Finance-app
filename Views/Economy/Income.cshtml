@@ -3,35 +3,37 @@
 <div class="m-1 lg:ml-3">
 <div class="lg:flex">
 <!-- INCOME CREATION -->
-<div class="m-2 bg-dark-900 rounded-lg h-fit w-full max-w-[500px] space-y-4 border border-dark-800">
+<div class="m-2 bg-dark-900 rounded-lg h-fit w-full max-w-[1000px] space-y-4 border border-dark-800">
     <h2 class="text-white font-bold font-2xl m-2">Create new income</h2>
     <form asp-action="Income" asp-controller="Economy" method="post" class="flex flex-col m-2 space-y-3">
         <label class="text-white ">Income Name</label>
         <input asp-for="IncomeName" type="text" class="rounded-lg p-3 w-full text-white border-hidden bg-dark-800">
 
-        <label class="text-white">Amount</label>
+        <label class="text-white">Amount (€)</label>
         <input asp-for="Amount" type="number" class="rounded-lg p-3 w-full text-white border-hidden bg-dark-800">
+        <label class="text-white">Payday</label>
         <input asp-for="Payday" type="date" class="rounded-lg p-3 w-full text-white border-hidden bg-dark-800">
-        <input asp-for="IsRecuring" type="checkbox" class="size-5 rounded border-gray-300 shadow-sm dark:border-gray-600 dark:bg-gray-900 dark:ring-offset-gray-900 dark:checked:bg-blue-600">
+        <!-- <label class="text-white">Recuring</label> -->
+        <!-- <input asp-for="IsRecuring" type="checkbox" class="size-5 rounded border-gray-300 shadow-sm dark:border-gray-600 dark:bg-gray-900 dark:ring-offset-gray-900 dark:checked:bg-blue-600"> -->
+        <!-- <p class="text-white">Check this box if your income happens monthly</p> -->
         <button type="submit" class="rounded-xl bg-blue-600 hover:bg-blue-500 text-white mt-4 p-2 p-1 text-lg cursor-pointer w-[170px]">Save</button>
     </form>
 </div>
 
 
 <!-- INFORMATION -->
-<div class="m-2 bg-dark-900 rounded-lg h-fit w-full max-w-[500px] space-y-4 border border-dark-800 w-full">
-    <h2 class="text-white font-bold m-2">Expense Informations</h2>
+<div class="m-2 bg-dark-900 rounded-lg h-fit w-full max-w-[1000px] space-y-4 border border-dark-800 w-full">
+    <h2 class="text-white font-bold m-2">Income Informations</h2>
     <p class="text-white font-medium m-2">Total: @Model.Sum€</p>
     <div class="flex items-center">
-        <p class="text-white m-2">Most expensive gategory is</p>
     </div>
 </div>
 </div>
 
 <!-- INCOME LIST -->
-<div class="m-2 bg-dark-900 rounded-lg h-fit w-full max-w-[500px] space-y-4 border border-dark-800">
+<div class="m-2 bg-dark-900 rounded-lg h-fit w-full max-w-[1000px] space-y-4 border border-dark-800">
 
-    <h2 class="text-white font-bold font-2xl m-2 m-1">Your expenses</h2>
+    <h2 class="text-white font-bold font-2xl m-2 m-1">Your incomes</h2>
 
     <div class="m-2">
         <div class="relative  m-2">

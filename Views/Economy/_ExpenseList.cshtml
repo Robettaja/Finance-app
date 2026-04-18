@@ -11,6 +11,10 @@
                 <p class="text-white">Gategory:</p>
                 <p class="text-white bg-dark-800 px-3 mx-2 rounded-xl py-2 text-bold">@expense.Gategory</p>
             </div>
+            <div class="flex items-center">
+                <p class="text-white">Date:</p>
+                <p class="text-white bg-dark-800 px-3 mx-2 rounded-xl py-2 font-bold">@(expense.Timestamp.ToString("dd.MM.yyyy"))</p>
+            </div>
         </div>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
              stroke="currentColor" class="text-red-500 size-8 cursor-pointer"
